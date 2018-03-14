@@ -1,3 +1,21 @@
 
 *.deb
 *.swp
+
+*.xml
+
+venv1/bin/activate
+
+*.csh
+
+*.fish
+
+venv1/bin/python
+
+venv1/bin/python3
+
+venv1/bin/python3\.5
+
+venv1/lib64
+
+*.cfg

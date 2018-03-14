@@ -5,7 +5,6 @@ import time
 import binascii
 
 out_data = bytearray()
-
 end_packet= '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'.encode()
 stoptime = time.time()
 starttime = time.time()
@@ -36,14 +35,17 @@ class ScanDelegate(DefaultDelegate):
             print('end_packet detected!')
             print(raw_data)
 
+            # Write raw data to file. Includes the header
             fo_raw = open("RawData.dat", "wb")
             fo_raw.write(out_data)
             fo_raw.close()
 
+            # Header file: Device UUID, Date Time, and Payload Length
             fo_uuid = open("devUUID_DateTime.txt", "w")
             fo_uuid.write("Device UUID: %s \nDate Time: %s \nPayload Length: %s \n" % (raw_data.decode('UTF-8')[:8], raw_data.decode('UTF-8')[8:16], raw_data.decode('UTF-8')[16:24]))
             fo_uuid.close()
 
+            # Actual payload file
             fo_payload = open("Report.txt", "w")
             fo_payload.write("%s\n" % raw_data.decode('UTF-8')[40:])
             fo_payload.close()
@@ -67,7 +69,7 @@ for dev in devices:
 
 print(addr)
 
-temp_UUID = UUID("2902")
+#temp_UUID = UUID("2902")
 
 p = Peripheral(addr)
 p.setDelegate(ScanDelegate())

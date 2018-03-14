@@ -20,12 +20,13 @@ gatt.expect("Connection successful", timeout =5)
 print(" Connected!")
 
 # Read characteristic
-#gatt.sendline("char-read-hnd 001e")
-#gatt.expect("Characteristic value/descriptor:", timeout = 10)
+gatt.sendline("char-read-hnd 0x001e")
+gatt.expect("Characteristic value/descriptor:", timeout = 10)
+gatt.expect("\r\n", timeout=10)
 
-#
-gatt.sendline("char-write-cmd 0024 00")
+# Write characteristic
+#gatt.sendline("char-write-cmd 0024 00")
 #gatt.expect("Characteristic value was written successfully")
-gatt.expect("\r\n", timeout = 10)
+#gatt.expect("\r\n", timeout = 10)
 #gatt.expect("Notification handle = 0x001e value:", timeout =10)
 print(gatt.before)
